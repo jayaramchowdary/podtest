@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: docker.io/jayarampuvvada/myrepo
-  tag: v1
+  repository: docker.io/soumyansh/demo.jar
+  tag: latest
   pullPolicy: Always
 
 imagePullSecrets: []
