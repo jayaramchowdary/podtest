@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: ananthkannan/myspringbootapp
-  tag: latest
+  repository: docker.io/jayarampuvvada/myrepo
+  tag: v1
   pullPolicy: Always
 
 imagePullSecrets: []
