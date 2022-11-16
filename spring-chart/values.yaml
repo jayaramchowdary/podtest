@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: docker.io/ananthkannan/myspringbootapp
+  repository: ananthkannan/myspringbootapp
   tag: latest
   pullPolicy: Always
 
@@ -36,7 +36,7 @@ service:
   port: 8085
 
 ingress:
-  enabled: true
+  enabled: false
   annotations: {}
      kubernetes.io/ingress.class: nginx
      # kubernetes.io/tls-acme: "true"
