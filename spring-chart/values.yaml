@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: jayarampuvvada/myrepo
-  tag: v2
+  repository: ananthkannan/myspringbootapp
+  tag: latest
   pullPolicy: Always
 
 imagePullSecrets: []
@@ -33,7 +33,7 @@ securityContext: {}
 
 service:
   type: LoadBalancer
-  port: 400
+  port: 8085
 
 ingress:
   enabled: false
