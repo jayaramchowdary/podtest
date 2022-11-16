@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: ananthkannan/myspringbootapp
+  repository: docker.io/ananthkannan/myspringbootapp
   tag: latest
   pullPolicy: Always
 
