@@ -60,19 +60,35 @@ resources: {}
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
-  
-readinessProbe:
-  initialDelaySeconds: 10
-  httpGet:
-    port: gunicorn
-    path: /
 livenessProbe:
-  initialDelaySeconds: 10
-  exec:
-    command:
-      - /bin/sh
-      - -c
-      - 'pidof -x gunicorn'
+    enabled: true
+    config: |
+      exec:
+        command:
+          - sh
+          - -c
+          - curl -s -k --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.artifactory.tomcat.maintenanceConnector.port }}/artifactory/api/v1/system/liveness
+      initialDelaySeconds: {{ if semverCompare "<v1.20.0-0" .Capabilities.KubeVersion.Version }}180{{ else }}0{{ end }}
+      periodSeconds: 10
+      timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+      failureThreshold: 5
+      successThreshold: 1
+      
+      
+readinessProbe:
+    enabled: true
+    config: |
+      exec:
+        command:
+          - sh
+          - -c
+          - curl -s -k --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.artifactory.tomcat.maintenanceConnector.port }}/artifactory/api/v1/system/readiness
+      initialDelaySeconds: {{ if semverCompare "<v1.20.0-0" .Capabilities.KubeVersion.Version }}90{{ else }}0{{ end }}
+      periodSeconds: 10
+      timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+      failureThreshold: 5
+      successThreshold: 1
+
 
 nodeSelector: {}
 
